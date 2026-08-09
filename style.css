@@ -326,19 +326,55 @@ body.no-scroll {
   animation: fadeSlideDown 1s ease forwards 1.3s;
 }
 
-.hero-ctas {
+.hero-actions {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+  opacity: 0;
+  animation: fadeSlideDown 1s ease forwards 1.6s;
+}
+
+.view-gallery-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeSlideDown 1s ease forwards 1.8s;
+  gap: 0.6rem;
+  padding: 0.85rem 2.2rem;
+  background: linear-gradient(135deg, rgba(108, 31, 203, 0.7), rgba(224, 64, 251, 0.6));
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(192, 132, 252, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.view-gallery-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 0 45px rgba(224, 64, 251, 0.75), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  border-color: var(--gold-light);
+}
+
+.view-gallery-btn:active {
+  transform: translateY(1px) scale(0.96);
+  box-shadow: 0 0 25px rgba(108, 31, 203, 0.6);
 }
 
 .scroll-cta {
   display: flex; flex-direction: column;
   align-items: center; gap: 0.5rem;
+  opacity: 1;
   cursor: pointer;
   /* Remove all default button styles */
   background: none;
