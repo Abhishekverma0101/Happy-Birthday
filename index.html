@@ -56,21 +56,22 @@
       the whole universe celebrates <em>you</em> 🌟
     </p>
 
-    <div class="hero-actions">
-      <button
-        class="view-gallery-btn"
-        aria-label="Scroll to photo gallery"
-        onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})"
-      >
-        📸 View Memory Gallery ✨
-      </button>
-
+    <div class="hero-ctas">
       <button
         class="scroll-cta"
         aria-label="Scroll to cake section"
         onclick="document.getElementById('cake').scrollIntoView({behavior:'smooth'})"
       >
         <span>Scroll Down</span>
+        <div class="scroll-arrow" aria-hidden="true"></div>
+      </button>
+
+      <button
+        class="scroll-cta"
+        aria-label="Scroll to gallery section"
+        onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})"
+      >
+        <span>View Gallery 📸</span>
         <div class="scroll-arrow" aria-hidden="true"></div>
       </button>
     </div>
