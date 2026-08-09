@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Mobile-first viewport — disables user zoom for app-like feel -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="A magical birthday celebration for the wonderful Ojasvi ✨" />
+
+  <!-- PWA / Home screen friendly -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="🎂 Ojasvi" />
+  <meta name="theme-color" content="#0a0015" />
+
+  <title>🎂 Happy Birthday Ojasvi! ✨</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+</head>
+<body class="no-scroll">
+
+  <!-- ======= STAR CANVAS ======= -->
+  <canvas id="starCanvas" aria-hidden="true"></canvas>
+
+  <!-- ======= CONFETTI CANVAS ======= -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- ======= WELCOME POPUP ======= -->
+  <div class="popup-overlay" id="welcomePopup" role="dialog" aria-modal="true" aria-label="Welcome">
+    <div class="popup-box">
+      <span class="popup-emoji" role="img" aria-label="party popper">🎊</span>
+      <h2 class="popup-title">It's Ojasvi's Day! <span class="beating-heart">💖</span></h2>
+      <p class="popup-subtitle">
+        Get ready for something truly magical.<br/>
+        A special celebration made just for her ✨
+      </p>
+      <button class="popup-btn" id="enterBtn" onclick="enterSite()">
+        ✨ Enter the Celebration
+      </button>
+    </div>
+  </div>
+
+  <!-- ======= HERO SECTION ======= -->
+  <section class="hero" id="home">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+    <div class="floaters" id="floaters" aria-hidden="true"></div>
+
+    <div class="hero-crown" role="img" aria-label="crown">👑</div>
+    <p class="hero-from">✦ A Celestial Birthday Celebration For ✦</p>
+    <h1 class="hero-name"><span class="beating-heart-side">💖</span> Ojasvi <span class="beating-heart-side">💖</span></h1>
+    <p class="hero-title">Happy Birthday</p>
+    <p class="hero-desc">
+      You are as rare and radiant as a star — and today,
+      the whole universe celebrates <em>you</em> 🌟
+    </p>
+
+    <button
+      class="scroll-cta"
+      aria-label="Scroll to cake section"
+      onclick="document.getElementById('cake').scrollIntoView({behavior:'smooth'})"
+    >
+      <span>Scroll Down</span>
+      <div class="scroll-arrow" aria-hidden="true"></div>
+    </button>
+  </section>
+
+  <!-- ======= CAKE SECTION ======= -->
+  <section class="cake-section" id="cake">
+    <p class="section-label reveal">✦ Make a Wish ✦</p>
+    <h2 class="section-title reveal">Blow Out the Candles!</h2>
+
+    <div
+      class="cake-wrapper reveal"
+      id="cakeWrapper"
+      role="button"
+      tabindex="0"
+      aria-label="Tap to blow out candles"
+      onclick="blowCandles()"
+    >
+      <!-- Candles -->
+      <div class="candles" id="candles" aria-hidden="true">
+        <div class="candle" id="c1"><div class="flame"></div><div class="candle-body"></div></div>
+        <div class="candle" id="c2"><div class="flame"></div><div class="candle-body"></div></div>
+        <div class="candle" id="c3"><div class="flame"></div><div class="candle-body"></div></div>
+        <div class="candle" id="c4"><div class="flame"></div><div class="candle-body"></div></div>
+        <div class="candle" id="c5"><div class="flame"></div><div class="candle-body"></div></div>
+      </div>
+      <div class="cake-top"    aria-hidden="true"></div>
+      <div class="cake-mid"    aria-hidden="true"></div>
+      <div class="cake-bottom" aria-hidden="true"></div>
+      <div class="cake-plate"  aria-hidden="true"></div>
+    </div>
+
+    <p class="blow-hint" id="blowHint">🎯 Tap the cake to blow out the candles!</p>
+  </section>
+
+  <!-- ======= MESSAGE SECTION ======= -->
+  <section class="message-section" id="message">
+    <p class="section-label reveal">✦ A Message From the Stars ✦</p>
+    <h2 class="section-title reveal">For You, Ojasvi</h2>
+
+    <div class="message-card reveal">
+      <span class="message-emoji" role="img" aria-label="sparkle">💫</span>
+      <p class="message-text">
+        On this special day, the stars align just for <span>you</span>,
+        Ojasvi. Your name means <span>"bright, lustrous &amp; radiant"</span>
+        — and every single day, you live up to it beautifully.<br/><br/>
+        May this birthday bring you every joy your heart desires,
+        every dream your soul imagines, and every love you so
+        generously give to others. You deserve nothing less than the
+        <span>entire universe</span> 🌌<br/><br/>
+        Here's to you — the brightest star in any room you walk into ✨
+      </p>
+      <p class="message-signature">With all the love in the galaxy 💛</p>
+    </div>
+  </section>
+
+  <!-- ======= WISHES SECTION ======= -->
+  <section class="wishes-section" id="wishes">
+    <p class="section-label reveal">✦ Birthday Wishes ✦</p>
+    <h2 class="section-title reveal">Our Wishes for You</h2>
+
+    <div class="wishes-grid">
+      <div class="wish-card reveal">
+        <span class="wish-icon" role="img" aria-label="star">🌟</span>
+        <h3 class="wish-title">Endless Happiness</h3>
+        <p class="wish-text">May every morning greet you with a smile and every night end with peace.</p>
+      </div>
+      <div class="wish-card reveal">
+        <span class="wish-icon" role="img" aria-label="muscle">💪</span>
+        <h3 class="wish-title">Unstoppable Success</h3>
+        <p class="wish-text">May every goal you set be crushed and every dream you chase be caught.</p>
+      </div>
+      <div class="wish-card reveal">
+        <span class="wish-icon" role="img" aria-label="heart">💖</span>
+        <h3 class="wish-title">Love &amp; Light</h3>
+        <p class="wish-text">May you always be surrounded by people who uplift and celebrate you.</p>
+      </div>
+      <div class="wish-card reveal">
+        <span class="wish-icon" role="img" aria-label="palette">🎨</span>
+        <h3 class="wish-title">Creative Joy</h3>
+        <p class="wish-text">May your life be a masterpiece full of color, passion, and wonder.</p>
+      </div>
+      <div class="wish-card reveal">
+        <span class="wish-icon" role="img" aria-label="globe">🌍</span>
+        <h3 class="wish-title">Adventure Awaits</h3>
+        <p class="wish-text">May you explore every corner of this beautiful world with joy.</p>
+      </div>
+      <div class="wish-card reveal">
+        <span class="wish-icon" role="img" aria-label="sparkles">✨</span>
+        <h3 class="wish-title">Inner Peace</h3>
+        <p class="wish-text">May your mind be calm, your heart full, and your spirit shine bright.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= 3D GALLERY SECTION ======= -->
+  <section class="gallery-section" id="gallery">
+    <p class="section-label reveal">✦ Memory Lane ✦</p>
+    <h2 class="section-title reveal">Beautiful Moments</h2>
+    <p class="gallery-subtitle reveal">Swipe to explore 👆</p>
+
+    <!-- 3D Coverflow Carousel -->
+    <div class="coverflow-scene" id="coverflowScene">
+      <div class="coverflow-track" id="coverflowTrack">
+        <div class="cf-card" data-cf="0">
+          <div class="cf-inner">
+            <img src="photo-01.jpg" alt="Ojasvi's Memory 1" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="1">
+          <div class="cf-inner">
+            <img src="photo-02.jpg" alt="Ojasvi's Memory 2" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="2">
+          <div class="cf-inner">
+            <img src="photo-03.png" alt="Ojasvi's Memory 3" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="3">
+          <div class="cf-inner">
+            <img src="photo-04.jpg" alt="Ojasvi's Memory 4" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="4">
+          <div class="cf-inner">
+            <img src="photo-05.png" alt="Ojasvi's Memory 5" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="5">
+          <div class="cf-inner">
+            <img src="photo-06.jpg" alt="Ojasvi's Memory 6" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="6">
+          <div class="cf-inner">
+            <img src="photo-07.jpg" alt="Ojasvi's Memory 7" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="7">
+          <div class="cf-inner">
+            <img src="photo-08.jpg" alt="Ojasvi's Memory 8" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="8">
+          <div class="cf-inner">
+            <img src="photo-09.png" alt="Ojasvi's Memory 9" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="9">
+          <div class="cf-inner">
+            <img src="photo-10.jpg" alt="Ojasvi's Memory 10" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="10">
+          <div class="cf-inner">
+            <img src="photo-11.jpg" alt="Ojasvi's Memory 11" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="11">
+          <div class="cf-inner">
+            <img src="photo-12.jpg" alt="Ojasvi's Memory 12" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="12">
+          <div class="cf-inner">
+            <img src="photo-13.jpg" alt="Ojasvi's Memory 13" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="13">
+          <div class="cf-inner">
+            <img src="photo-14.jpg" alt="Ojasvi's Memory 14" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="14">
+          <div class="cf-inner">
+            <img src="photo-15.jpg" alt="Ojasvi's Memory 15" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="15">
+          <div class="cf-inner">
+            <img src="photo-16.jpg" alt="Ojasvi's Memory 16" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="16">
+          <div class="cf-inner">
+            <img src="photo-17.jpg" alt="Ojasvi's Memory 17" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="17">
+          <div class="cf-inner">
+            <img src="photo-18.jpg" alt="Ojasvi's Memory 18" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="18">
+          <div class="cf-inner">
+            <img src="photo-19.jpg" alt="Ojasvi's Memory 19" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="19">
+          <div class="cf-inner">
+            <img src="photo-20.jpg" alt="Ojasvi's Memory 20" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="20">
+          <div class="cf-inner">
+            <img src="photo-21.jpg" alt="Ojasvi's Memory 21" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="21">
+          <div class="cf-inner">
+            <img src="photo-22.jpg" alt="Ojasvi's Memory 22" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="22">
+          <div class="cf-inner">
+            <img src="photo-23.jpg" alt="Ojasvi's Memory 23" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="23">
+          <div class="cf-inner">
+            <img src="photo-24.jpg" alt="Ojasvi's Memory 24" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="24">
+          <div class="cf-inner">
+            <img src="photo-25.jpg" alt="Ojasvi's Memory 25" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="25">
+          <div class="cf-inner">
+            <img src="photo-26.jpg" alt="Ojasvi's Memory 26" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="26">
+          <div class="cf-inner">
+            <img src="photo-27.jpg" alt="Ojasvi's Memory 27" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="27">
+          <div class="cf-inner">
+            <img src="photo-28.jpg" alt="Ojasvi's Memory 28" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="28">
+          <div class="cf-inner">
+            <img src="photo-29.jpg" alt="Ojasvi's Memory 29" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="29">
+          <div class="cf-inner">
+            <img src="photo-30.jpg" alt="Ojasvi's Memory 30" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="30">
+          <div class="cf-inner">
+            <img src="photo-31.jpg" alt="Ojasvi's Memory 31" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="31">
+          <div class="cf-inner">
+            <img src="photo-32.png" alt="Ojasvi's Memory 32" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="32">
+          <div class="cf-inner">
+            <img src="photo-33.png" alt="Ojasvi's Memory 33" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="33">
+          <div class="cf-inner">
+            <img src="photo-34.png" alt="Ojasvi's Memory 34" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="34">
+          <div class="cf-inner">
+            <img src="photo-35.png" alt="Ojasvi's Memory 35" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="35">
+          <div class="cf-inner">
+            <img src="photo-36.png" alt="Ojasvi's Memory 36" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="36">
+          <div class="cf-inner">
+            <img src="photo-37.png" alt="Ojasvi's Memory 37" loading="lazy" />
+          </div>
+        </div>
+        <div class="cf-card" data-cf="37">
+          <div class="cf-inner">
+            <img src="photo-38.png" alt="Ojasvi's Memory 38" loading="lazy" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="cf-dots" id="cfDots" aria-label="Photo navigation"></div>
+
+    <!-- Counter + Nav buttons -->
+    <div class="cf-controls">
+      <button class="cf-btn-nav" id="cfPrev" aria-label="Previous photo">&#8592;</button>
+      <p class="cf-counter" id="cfCounter">1 / 38</p>
+      <button class="cf-btn-nav" id="cfNext" aria-label="Next photo">&#8594;</button>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer>
+    <span class="footer-stars" aria-hidden="true">⭐ 🌟 ✨ 🌟 ⭐</span>
+    <p class="footer-text">Happy Birthday, Ojasvi! 🎂</p>
+    <p class="footer-sub">Made with ❤️ &amp; stardust · 2026</p>
+  </footer>
+
+  <!-- ======= MUSIC PLAYER ======= -->
+  <div class="music-player" role="region" aria-label="Music player">
+    <div class="music-label" id="musicLabel" aria-live="polite">🎵 Birthday Music</div>
+    <button
+      class="music-btn"
+      id="musicBtn"
+      onclick="toggleMusic()"
+      aria-label="Toggle birthday music"
+      aria-pressed="false"
+    >🔔</button>
+  </div>
+
+  <!-- ======= LIGHTBOX ======= -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full size photo">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close photo">✕</button>
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-content">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="Full size photo" />
+      <div class="lightbox-placeholder" id="lightboxPlaceholder">
+        <span>📸</span>
+        <p>Add a photo here to see it full size!</p>
+      </div>
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter">1 / 38</div>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
