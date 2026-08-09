@@ -136,6 +136,13 @@ body.no-scroll {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 0 30px rgba(108,31,203,0.5);
   -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10005;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .popup-btn:active {

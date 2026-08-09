@@ -11,8 +11,15 @@ const isTouchDevice = () => window.matchMedia('(pointer: coarse)').matches;
 // ============================================
 // 1. WELCOME POPUP
 // ============================================
-function enterSite() {
+let siteEntered = false;
+function enterSite(e) {
+  if (e && e.stopPropagation) e.stopPropagation();
+  if (siteEntered) return;
+  siteEntered = true;
+
   const popup = document.getElementById('welcomePopup');
+  if (!popup) return;
+
   // Unlock body scroll now that popup is dismissed
   document.body.classList.remove('no-scroll');
   popup.style.transition = 'opacity 0.6s ease';
@@ -568,11 +575,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initLightbox();
   initCoverflow();
 
-  // Prevent double-tap zoom on interactive elements (iOS)
-  document.querySelectorAll('button, .cake-wrapper, .wish-card').forEach(el => {
-    el.addEventListener('touchend', e => e.preventDefault(), { passive: false });
-    el.addEventListener('click', () => {});
-  });
+  // Explicit touch & click handling for Enter button (mobile friendly)
+  const enterBtn = document.getElementById('enterBtn');
+  if (enterBtn) {
+    enterBtn.addEventListener('click', enterSite);
+    enterBtn.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      enterSite(e);
+    }, { passive: false });
+  }
 });
 
 // ============================================
